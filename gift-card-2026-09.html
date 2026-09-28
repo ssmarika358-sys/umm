@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A Little Something for You</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:#f3eee6;color:#243c35;font-family:Georgia,"Times New Roman",serif}
+.card{position:relative;width:min(760px,100%);min-height:430px;overflow:hidden;display:grid;grid-template-columns:1.1fr .9fr;background:#fffaf0;border:1px solid #d8c8a9;box-shadow:0 24px 70px #4a392326}
+.words{position:relative;z-index:1;padding:58px 48px;display:flex;flex-direction:column;justify-content:center}
+.eyebrow{font:700 11px/1.4 system-ui,sans-serif;letter-spacing:.25em;text-transform:uppercase;color:#a56d42}
+h1{max-width:370px;margin:18px 0 14px;font-size:clamp(38px,7vw,64px);line-height:.98;font-weight:400}
+.copy{max-width:310px;color:#68766b;font:15px/1.6 system-ui,sans-serif}
+.fields{display:flex;gap:24px;margin-top:36px;color:#53685c;font:12px system-ui,sans-serif}
+.field{min-width:90px;border-bottom:1px solid #b5bca9;padding-bottom:7px}
+.art{position:relative;display:grid;place-items:center;background:#315b4c;overflow:hidden}
+.sun{position:absolute;width:235px;height:235px;border-radius:50%;background:#e9b96f;right:-35px;top:55px}
+.leaf{position:absolute;width:110px;height:190px;border-radius:100% 0 100% 0;background:#799076;transform:rotate(36deg);left:12%;bottom:-45px}
+.leaf.two{width:78px;height:152px;left:32%;bottom:-28px;background:#a9b596;transform:rotate(60deg)}
+.flower{position:relative;z-index:1;width:130px;height:130px;border-radius:50%;background:#f6e2bd;box-shadow:inset 0 0 0 16px #e7c995,0 12px 30px #20382f55}
+.flower:before,.flower:after{content:"";position:absolute;inset:23px;border:2px solid #bd8a59;border-radius:50%}
+.flower:after{inset:45px;background:#bd8a59}
+.spark{position:absolute;z-index:1;color:#fff2ce;font:24px Georgia,serif}
+.s1{top:15%;left:22%}.s2{right:14%;bottom:23%}.s3{right:19%;top:22%;font-size:15px}
+.corner{position:absolute;inset:14px;border:1px solid #ffffff55;pointer-events:none}
+@media(max-width:560px){body{padding:14px}.card{grid-template-columns:1fr;grid-template-rows:310px 190px}.words{padding:28px}.art{grid-row:1}.sun{width:190px;height:190px;top:38px}.flower{width:105px;height:105px}.flower:before{inset:18px}.flower:after{inset:36px}.fields{margin-top:24px}}
+@media print{body{min-height:0;padding:0;background:white}.card{width:7in;height:4in;min-height:0;box-shadow:none;print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<main class="card">
+  <section class="words">
+    <div class="eyebrow"> my love</div>
+    <h1>Sanu I'm sorry, my love I was wrong.</h1>
+    <div class="copy">I love you so muchhhou’re the only one I’ve got im sooryryr sanu i was wrong i may had done bad i feeel terrible im sorryry sanu</div>
+    <div class="fields"><div class="field">For<br><strong>Smarika</strong></div><div class="field">From<br><strong>Anish</strong></div></div>
+  </section>
+  <section class="art" aria-label="Decorative flower illustration">
+    <div class="corner"></div><div class="sun"></div><div class="leaf"></div><div class="leaf two"></div><div class="flower"></div>
+    <span class="spark s1">✦</span><span class="spark s2">✦</span><span class="spark s3">✧</span>
+  </section>
+</main>
+</body>
+</html>
