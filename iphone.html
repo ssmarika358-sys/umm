@@ -6,45 +6,82 @@
 <meta name="theme-color" content="#10151d">
 <title>Little Phone · iOS 27 Concept</title>
 <style>
-:root{color-scheme:dark;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:root{
+  color-scheme:dark;
+  --bg-dark:#11151b;
+  --bg-mid:#313e50;
+  --glass:rgba(255,255,255,.18);
+  --glass-strong:rgba(255,255,255,.32);
+  --accent:#2585ff;
+  --accent-soft:#a8d1ff;
+  --text:#17181c;
+  --muted:#747680;
+  --shadow:rgba(23,32,45,.22);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
 *{box-sizing:border-box}
-body{min-height:100vh;margin:0;display:grid;place-items:center;padding:16px;background:radial-gradient(ellipse at 50% 35%,#313e50,#11151b 72%);color:#fff}
+html,body{height:100%}
+body{
+  min-height:100vh;
+  margin:0;
+  display:grid;
+  place-items:center;
+  padding:16px;
+  background:radial-gradient(ellipse at 50% 35%,var(--bg-mid),var(--bg-dark) 72%);
+  color:#fff;
+}
 button,input,textarea{font:inherit}
 button{color:inherit}
-.phone{position:relative;width:min(390px,100%);height:min(844px,calc(100dvh - 32px));min-height:560px;padding:10px;border:1px solid #626770;border-radius:50px;background:linear-gradient(135deg,#343941,#080a0d 45%,#252a30);box-shadow:0 35px 90px #0009,inset 0 0 0 2px #ffffff14}
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible{
+  outline:3px solid rgba(37,133,255,.8);
+  outline-offset:2px;
+}
+.phone{position:relative;width:min(390px,100%);height:min(844px,calc(100dvh - 32px));min-height:560px;padding:10px;border:1px solid #626770;border-radius:50px;background:linear-gradient(135deg,#343941,#11151b 55%,#1d2127);box-shadow:0 30px 80px rgba(0,0,0,.42)}
 .screen{position:relative;height:100%;overflow:hidden;border-radius:41px;background:#8eadd0}
-.wallpaper{position:absolute;inset:0;background:radial-gradient(ellipse at 68% 32%,#f8cb91 0 8%,transparent 36%),radial-gradient(ellipse at 23% 61%,#aed4c5 0 15%,transparent 47%),linear-gradient(155deg,#7294be,#a7a6c7 46%,#e5aa91)}
-.status{position:absolute;z-index:6;top:0;left:0;right:0;height:48px;padding:14px 27px 0;display:flex;justify-content:space-between;align-items:flex-start;font-size:12px;font-weight:700;text-shadow:0 1px 5px #0006}
+.wallpaper{position:absolute;inset:0;transition:background .25s ease}
+.wallpaper-dawn{background:radial-gradient(ellipse at 68% 32%,#f8cb91 0 8%,transparent 36%),radial-gradient(ellipse at 23% 61%,#aed4c5 0 15%,transparent 47%),linear-gradient(155deg,#7294be,#a7a6c7 46%,#f0b7a4)}
+.wallpaper-ocean{background:radial-gradient(ellipse at 67% 25%,#b9f2e5 0 5%,transparent 34%),radial-gradient(ellipse at 18% 74%,#5274bd 0 12%,transparent 42%),linear-gradient(145deg,#24366f,#5c79bd 55%,#8cc9d9)}
+.wallpaper-sunset{background:radial-gradient(ellipse at 70% 32%,#ffe7a2 0 8%,transparent 37%),linear-gradient(155deg,#772f77,#e56b76 54%,#f5ba78)}
+.wallpaper-mint{background:radial-gradient(ellipse at 70% 28%,#fff0bb 0 7%,transparent 35%),linear-gradient(145deg,#628e85,#9bc9b2 52%,#dee3c0)}
+.status{position:absolute;z-index:6;top:0;left:0;right:0;height:48px;padding:14px 27px 0;display:flex;justify-content:space-between;align-items:flex-start;font-size:12px;font-weight:700;text-shadow:0 1px 8px rgba(0,0,0,.35)}
 .island{position:absolute;top:10px;left:50%;width:104px;height:27px;transform:translateX(-50%);border-radius:20px;background:#090a0d}
-.status-right{display:flex;gap:5px;align-items:center}.signal{font-size:11px;letter-spacing:-3px}.battery{width:19px;height:10px;border:1.5px solid white;border-radius:3px;position:relative}.battery:before{content:"";position:absolute;inset:2px;background:white;border-radius:1px}.battery:after{content:"";position:absolute;right:-3px;top:2px;width:2px;height:4px;background:white;border-radius:0 2px 2px 0}
-.home{position:absolute;inset:52px 22px 22px;display:flex;flex-direction:column}
+.status-right{display:flex;gap:5px;align-items:center}
+.signal{font-size:11px;letter-spacing:-3px}
+.battery{width:19px;height:10px;border:1.5px solid white;border-radius:3px;position:relative}
+.battery:after{content:"";position:absolute;right:-4px;top:2px;width:2px;height:4px;border-radius:1px;background:white}
+.battery:before{content:"";position:absolute;inset:1px 1px 1px 1px;border-radius:2px;background:#fff}
+.home{position:absolute;inset:52px 22px 22px;display:flex;flex-direction:column;z-index:2}
 .home[hidden]{display:none}
-.date{text-align:center;margin:14px 0 22px;font-size:14px;font-weight:600;text-shadow:0 1px 6px #0005}
-.big-clock{text-align:center;margin:0 0 30px;font-size:58px;line-height:1;font-weight:300;letter-spacing:-3px;text-shadow:0 2px 15px #0003}
+.date{text-align:center;margin:14px 0 22px;font-size:14px;font-weight:600;text-shadow:0 1px 6px rgba(0,0,0,.35)}
+.big-clock{text-align:center;margin:0 0 30px;font-size:58px;line-height:1;font-weight:300;letter-spacing:-3px;text-shadow:0 2px 15px rgba(0,0,0,.15)}
 .apps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px 10px}
-.app-launch{display:flex;min-width:0;flex-direction:column;align-items:center;gap:6px;padding:0;border:0;background:none;cursor:pointer}
-.app-icon{width:58px;height:58px;display:grid;place-items:center;border-radius:17px;background:#ffffffd9;box-shadow:0 5px 12px #17202d2b;font-size:31px;transition:transform .16s}
-.app-launch:active .app-icon{transform:scale(.9)}
-.app-label{max-width:76px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px;text-shadow:0 1px 5px #0008}
-.dock{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:auto;padding:12px 10px;border:1px solid #ffffff2c;border-radius:25px;background:#ffffff32;backdrop-filter:blur(18px)}
+.app-launch{display:flex;min-width:0;flex-direction:column;align-items:center;gap:6px;padding:0;border:0;background:none;cursor:pointer;transition:transform .15s ease}
+.app-launch:hover{transform:translateY(-1px)}
+.app-launch:active .app-icon{transform:scale(.92)}
+.app-icon{width:58px;height:58px;display:grid;place-items:center;border-radius:17px;background:rgba(255,255,255,.85);box-shadow:0 5px 12px rgba(23,32,45,.18);font-size:31px;transition:transform .16s ease}
+.app-label{max-width:76px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px;text-shadow:0 1px 5px rgba(0,0,0,.5)}
+.dock{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:auto;padding:12px 10px;border:1px solid rgba(255,255,255,.2);border-radius:25px;background:rgba(255,255,255,.2);backdrop-filter:blur(18px)}
 .dock .app-label{display:none}
-.panel{position:absolute;z-index:2;inset:0;display:flex;flex-direction:column;padding:54px 22px 26px;background:#f4f4f8;color:#17181c;animation:rise .2s ease-out}
+.panel{position:absolute;z-index:2;inset:0;display:flex;flex-direction:column;padding:54px 22px 26px;background:#f4f4f8;color:var(--text);animation:rise .2s ease-out}
 @keyframes rise{from{transform:translateY(18px);opacity:.7}to{transform:translateY(0);opacity:1}}
 .panel-head{display:flex;align-items:center;justify-content:space-between;margin:0 0 20px}
-.panel-head h2{margin:0;font-size:23px}.close{width:35px;height:35px;border:0;border-radius:50%;background:#e4e5ea;color:#333;font-size:22px;cursor:pointer}
+.panel-head h2{margin:0;font-size:23px}
+.close{width:35px;height:35px;border:0;border-radius:50%;background:#e4e5ea;color:#333;font-size:22px;cursor:pointer}
 .panel-content{flex:1;min-height:0;overflow:auto}
-.hint{text-align:center;color:#747680;font-size:12px}
-.lock-screen{position:absolute;z-index:5;inset:0;display:flex;flex-direction:column;align-items:center;padding:82px 24px 30px;text-align:center;text-shadow:0 2px 14px #0004;touch-action:pan-y;user-select:none;transition:transform .35s ease,opacity .35s ease}
+.hint{text-align:center;color:var(--muted);font-size:12px}
+.lock-screen{position:absolute;z-index:5;inset:0;display:flex;flex-direction:column;align-items:center;padding:82px 24px 30px;text-align:center;text-shadow:0 2px 14px rgba(0,0,0,.25);touch-action:pan-y;user-select:none}
 .lock-screen[hidden]{display:none}
-.lock-mark{width:34px;height:34px;display:grid;place-items:center;margin-bottom:15px;border:1px solid #ffffff80;border-radius:50%;background:#ffffff24;backdrop-filter:blur(18px);font-size:15px}
+.lock-mark{width:34px;height:34px;display:grid;place-items:center;margin-bottom:15px;border:1px solid rgba(255,255,255,.55);border-radius:50%;background:rgba(255,255,255,.12);backdrop-filter:blur(18px);font-size:15px}
 .lock-date{margin:0 0 2px;font-size:17px;font-weight:600}
 .lock-clock{font-size:clamp(76px,22vw,104px);line-height:1;font-weight:250;letter-spacing:-5px}
-.lock-notification{width:min(310px,100%);margin-top:auto;padding:14px 17px;border:1px solid #ffffff50;border-radius:20px;background:#ffffff40;text-align:left;backdrop-filter:blur(24px);text-shadow:none}
+.lock-notification{width:min(310px,100%);margin-top:auto;padding:14px 17px;border:1px solid rgba(255,255,255,.3);border-radius:20px;background:rgba(255,255,255,.19);text-align:left;backdrop-filter:blur(24px);text-shadow:none}
 .lock-notification strong{font-size:13px}.lock-notification p{margin:4px 0 0;font-size:13px}
-.unlock-button{margin-top:20px;padding:10px 18px;border:1px solid #ffffff88;border-radius:24px;background:#ffffff24;backdrop-filter:blur(18px);font-size:13px;cursor:pointer}
+.unlock-button{margin-top:20px;padding:10px 18px;border:1px solid rgba(255,255,255,.55);border-radius:24px;background:rgba(255,255,255,.16);backdrop-filter:blur(18px);font-size:13px;cursor:pointer}
 .lock-help{margin:8px 0 0;font-size:11px;opacity:.82}
-.lock-button{position:absolute;top:0;right:0;z-index:1;padding:7px 11px;border:1px solid #ffffff45;border-radius:20px;background:#ffffff28;backdrop-filter:blur(16px);font-size:12px;cursor:pointer}
-.app-launch:focus-visible,.lock-button:focus-visible,.unlock-button:focus-visible,.close:focus-visible,.setting-row button:focus-visible,.calc-key:focus-visible,.message-form button:focus-visible,.search-form button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.lock-button{position:absolute;top:0;right:0;z-index:1;padding:7px 11px;border:1px solid rgba(255,255,255,.3);border-radius:20px;background:rgba(255,255,255,.12);backdrop-filter:blur(16px);font-size:12px;cursor:pointer}
+.app-launch:focus-visible,.lock-button:focus-visible,.unlock-button:focus-visible,.close:focus-visible,.setting-row button:focus-visible,.calc-key:focus-visible,.message-form button:focus-visible,.reminder-form button:focus-visible,.reminder-delete:focus-visible{outline:3px solid rgba(37,133,255,.8);outline-offset:2px}
 .calc{height:100%;display:flex;flex-direction:column;justify-content:flex-end;max-width:310px;margin:0 auto}
 .calc-display{min-height:90px;display:flex;align-items:flex-end;justify-content:flex-end;overflow:hidden;padding:12px 4px;font-size:54px;font-weight:300}
 .calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
@@ -52,20 +89,18 @@ button{color:inherit}
 .calc-key.utility{background:#a8a9ae}.calc-key.operator{background:#ff9f0a;color:white}.calc-key.zero{grid-column:span 2;aspect-ratio:auto;border-radius:40px;text-align:left;padding-left:26px}
 .notes{width:100%;height:calc(100% - 32px);resize:none;border:0;border-radius:14px;padding:16px;background:#fff;color:#222;font-size:16px;line-height:1.55;outline-color:#aaa}
 .note-status{min-height:24px;padding-top:8px;color:#65666d;font-size:12px}
-.messages{display:flex;flex-direction:column;gap:10px;padding:8px 2px}
-.bubble{max-width:82%;padding:10px 14px;border-radius:18px;background:#e1e2e7;color:#222;font-size:14px}.bubble.mine{align-self:flex-end;background:#2585ff;color:white}
-.message-form{display:flex;gap:8px;margin-top:12px}.message-form input{min-width:0;flex:1;border:1px solid #d1d2d8;border-radius:20px;padding:10px 14px;background:white;color:#222;outline-color:#2585ff}.send{border:0;border-radius:20px;padding:0 16px;background:#2585ff;color:white;cursor:pointer}
-.music{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}.album{width:190px;height:190px;display:grid;place-items:center;margin-bottom:24px;border-radius:28px;background:linear-gradient(145deg,#f2a995,#b0a2d2 55%,#7c9fc0);font-size:72px;box-shadow:0 12px 30px #0002}.music button{width:56px;height:56px;border:0;border-radius:50%;background:#2585ff;font-size:22px;cursor:pointer}
-.settings{display:flex;flex-direction:column;gap:12px}.setting-row{display:flex;justify-content:space-between;align-items:center;padding:15px;border-radius:14px;background:white}.setting-row button{border:0;border-radius:18px;padding:8px 13px;background:#2585ff;cursor:pointer}
+.messages{display:flex;flex-direction:column;gap:10px;padding:8px 2px;max-height:420px;overflow:auto}
+.bubble{max-width:82%;padding:10px 14px;border-radius:18px;background:#e1e2e7;color:#222;font-size:14px;overflow-wrap:anywhere}.bubble.mine{align-self:flex-end;background:#2585ff;color:white}
+.message-form{display:flex;gap:8px;margin-top:12px}.message-form input{min-width:0;flex:1;border:1px solid #d1d2d8;border-radius:20px;padding:10px 14px;background:white;color:#222;outline-color:#2585ff}
+.message-form button{border:0;border-radius:20px;padding:10px 14px;background:#2585ff;color:white;cursor:pointer}
+.music{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}.album{width:190px;height:190px;display:grid;place-items:center;margin-bottom:24px;border-radius:40px;background:linear-gradient(145deg,#f27b90,#ab71cd);color:white;box-shadow:0 18px 40px rgba(140,90,170,.35);font-size:84px}
+.music button{margin-top:12px;border:0;border-radius:50%;width:58px;height:58px;background:#ffffffcc;color:#333;cursor:pointer;font-size:24px;box-shadow:0 8px 18px rgba(0,0,0,.15)}
+.settings{display:flex;flex-direction:column;gap:12px}.setting-row{display:flex;justify-content:space-between;align-items:center;padding:15px;border-radius:14px;background:white;color:#202226}.setting-row button{border:0;border-radius:12px;padding:8px 12px;background:#eaf2ff;color:#1d4b8f;cursor:pointer}
 .wallpaper-picker{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.wallpaper-choice{position:relative;min-height:100px;border:2px solid transparent;border-radius:18px;cursor:pointer;box-shadow:inset 0 0 0 1px #0001}
+.wallpaper-choice{position:relative;min-height:100px;border:2px solid transparent;border-radius:18px;cursor:pointer;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
 .wallpaper-choice[aria-pressed="true"]{border-color:#2585ff}
 .wallpaper-choice[aria-pressed="true"]:after{content:"✓";position:absolute;right:8px;top:8px;width:23px;height:23px;display:grid;place-items:center;border-radius:50%;background:#2585ff;color:white}
-.wallpaper-choice span{position:absolute;left:10px;bottom:9px;padding:4px 8px;border-radius:12px;background:#ffffffcc;color:#25262b;font-size:11px}
-.wallpaper-dawn{background:radial-gradient(ellipse at 68% 32%,#f8cb91 0 8%,transparent 36%),radial-gradient(ellipse at 23% 61%,#aed4c5 0 15%,transparent 47%),linear-gradient(155deg,#7294be,#a7a6c7 46%,#e5aa91)}
-.wallpaper-ocean{background:radial-gradient(ellipse at 67% 25%,#b9f2e5 0 5%,transparent 34%),radial-gradient(ellipse at 18% 74%,#5274bd 0 12%,transparent 42%),linear-gradient(145deg,#24366f,#5c79bd 55%,#a5d8cf)}
-.wallpaper-sunset{background:radial-gradient(ellipse at 70% 32%,#ffe7a2 0 8%,transparent 37%),linear-gradient(155deg,#772f77,#e56b76 54%,#f5ba78)}
-.wallpaper-mint{background:radial-gradient(ellipse at 70% 28%,#fff0bb 0 7%,transparent 35%),linear-gradient(145deg,#628e85,#9bc9b2 52%,#dee3c0)}
+.wallpaper-choice span{position:absolute;left:10px;bottom:9px;padding:4px 8px;border-radius:12px;background:rgba(255,255,255,.8);color:#25262b;font-size:11px}
 .photos-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .photo-tile{min-height:130px;border-radius:18px}
 .photo-tile:nth-child(1){background:radial-gradient(circle at 65% 30%,#ffe2a0 0 10%,transparent 11%),linear-gradient(145deg,#557da0,#e69e8d)}
@@ -73,17 +108,18 @@ button{color:inherit}
 .photo-tile:nth-child(3){background:radial-gradient(circle at 30% 38%,#faf2d4 0 8%,transparent 9%),linear-gradient(145deg,#928abe,#e7a7ad)}
 .photo-tile:nth-child(4){background:radial-gradient(ellipse at 70% 78%,#f7dca1 0 17%,transparent 18%),linear-gradient(145deg,#7aa6a2,#bbc5dc)}
 .reminder-form{display:flex;gap:8px;margin-bottom:14px}.reminder-form input{flex:1;min-width:0;border:1px solid #d1d2d8;border-radius:18px;padding:10px 13px;background:white;color:#222}
-.reminder-form button{border:0;border-radius:18px;padding:0 15px;background:#2585ff}
+.reminder-form button{border:0;border-radius:18px;padding:0 15px;background:#2585ff;color:white;cursor:pointer}
 .reminder-list{display:grid;gap:8px;padding:0;list-style:none}
 .reminder-item{display:flex;gap:10px;align-items:center;padding:12px;border-radius:14px;background:#fff}
 .reminder-item input{width:18px;height:18px;accent-color:#2585ff}
 .reminder-item span{flex:1;min-width:0;overflow-wrap:anywhere}
 .reminder-delete{border:0;border-radius:14px;padding:6px 9px;background:#f1e4e6;color:#a13746;cursor:pointer}
 .reminder-item.done span{text-decoration:line-through;color:#777}
-.home-indicator{position:absolute;z-index:4;bottom:8px;left:50%;width:116px;height:4px;transform:translateX(-50%);border-radius:4px;background:#ffffffd9}
+.empty-state{padding:12px;border-radius:14px;background:#fff;color:#6f7280;text-align:center}
+.home-indicator{position:absolute;z-index:4;bottom:8px;left:50%;width:116px;height:4px;transform:translateX(-50%);border-radius:4px;background:rgba(255,255,255,.85)}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-@media(max-height:650px){.phone{min-height:0;border-radius:38px;padding:8px}.screen{border-radius:31px}.home{inset:48px 18px 18px}.date{margin:7px 0 10px}.big-clock{margin-bottom:17px;font-size:48px}.apps{gap:14px 8px}.app-icon{width:50px;height:50px;font-size:27px}.panel{padding-top:48px}}
-@media(max-width:430px){body{padding:0;background:#111}.phone{width:100%;height:100dvh;min-height:0;padding:0;border:0;border-radius:0;box-shadow:none}.screen{border-radius:0}.home-indicator{bottom:max(8px,env(safe-area-inset-bottom))}.panel{padding-top:max(54px,calc(env(safe-area-inset-top) + 48px));padding-bottom:max(26px,env(safe-area-inset-bottom))}.status{padding-top:max(14px,env(safe-area-inset-top))}}
+@media(max-height:650px){.phone{min-height:0;border-radius:38px;padding:8px}.screen{border-radius:31px}.home{inset:48px 18px 18px}.date{margin:7px 0 10px}.big-clock{margin-bottom:17px;font-size:48px}.apps{gap:16px 8px}.dock{padding:10px 8px}.lock-screen{padding-top:66px}}
+@media(max-width:430px){body{padding:0;background:#111}.phone{width:100%;height:100dvh;min-height:0;padding:0;border:0;border-radius:0;box-shadow:none}.screen{border-radius:0}.home-indicator{bottom:max(8px,env(safe-area-inset-bottom))}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -91,7 +127,7 @@ button{color:inherit}
 <main class="phone" aria-label="Interactive phone simulator">
   <div class="screen">
     <div class="wallpaper wallpaper-dawn" id="wallpaper"></div>
-    <div class="status"><span id="status-time">9:41</span><span class="island" aria-hidden="true"></span><span class="status-right"><span class="signal" aria-label="Signal">▂▄▆</span><span aria-hidden="true">◉</span><span class="battery" aria-label="Battery full"></span></span></div>
+    <div class="status"><span id="status-time">9:41</span><span class="island" aria-hidden="true"></span><span class="status-right"><span class="signal" aria-label="Signal">▂▄▆</span><span class="battery" aria-label="Battery"></span></span></div>
     <section class="home" id="home" aria-label="Home screen" hidden>
       <button class="lock-button" id="lock-button" aria-label="Lock screen">🔒 Lock</button>
       <div class="date" id="date"></div>
@@ -135,7 +171,59 @@ const lockScreen = document.getElementById("lock-screen");
 const lockClock = document.getElementById("lock-clock");
 const lockDate = document.getElementById("lock-date");
 const wallpaperOptions = ["dawn", "ocean", "sunset", "mint"];
+const APP_TITLES = {
+  photos: "Photos",
+  messages: "Messages",
+  calculator: "Calculator",
+  notes: "Notes",
+  reminders: "Reminders",
+  music: "Music",
+  settings: "Settings"
+};
+const STORAGE_KEYS = {
+  wallpaper: "little-phone-wallpaper",
+  note: "little-phone-note",
+  reminders: "little-phone-reminders",
+  messages: "little-phone-messages"
+};
 let locked = true;
+
+const storage = {
+  get(key, fallback) {
+    try {
+      const value = localStorage.getItem(key);
+      return value === null ? fallback : value;
+    } catch {
+      return fallback;
+    }
+  },
+  set(key, value) {
+    try {
+      localStorage.setItem(key, value);
+      return true;
+    } catch {
+      return false;
+    }
+  },
+  getJSON(key, fallback) {
+    try {
+      const raw = localStorage.getItem(key);
+      if (!raw) return fallback;
+      const parsed = JSON.parse(raw);
+      return parsed ?? fallback;
+    } catch {
+      return fallback;
+    }
+  },
+  setJSON(key, value) {
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+      return true;
+    } catch {
+      return false;
+    }
+  }
+};
 
 function updateClock() {
   const now = new Date();
@@ -167,21 +255,16 @@ function applyWallpaper(name) {
   document.querySelectorAll(".wallpaper-choice").forEach(button => {
     button.setAttribute("aria-pressed", String(button.dataset.wallpaper === selected));
   });
-  try {
-    localStorage.setItem("little-phone-wallpaper", selected);
-  } catch {
+  const saved = storage.set(STORAGE_KEYS.wallpaper, selected);
+  if (!saved) {
     const status = document.getElementById("settings-status");
     if (status) status.textContent = "Wallpaper changed for this visit, but could not be saved on this device.";
   }
 }
 
-try {
-  const savedWallpaper = localStorage.getItem("little-phone-wallpaper");
-  if (savedWallpaper && wallpaperOptions.includes(savedWallpaper)) {
-    wallpaper.className = `wallpaper wallpaper-${savedWallpaper}`;
-  }
-} catch {
-  // The phone remains usable when browser storage is unavailable.
+const savedWallpaper = storage.get(STORAGE_KEYS.wallpaper, "dawn");
+if (wallpaperOptions.includes(savedWallpaper)) {
+  wallpaper.className = `wallpaper wallpaper-${savedWallpaper}`;
 }
 
 document.getElementById("unlock-button").addEventListener("click", () => setLocked(false));
@@ -205,12 +288,20 @@ function closeApp() {
 }
 
 function openApp(name) {
+  if (!APP_TITLES[name]) return;
   home.hidden = true;
-  const titles = { photos: "Photos", messages: "Messages", calculator: "Calculator", notes: "Notes", reminders: "Reminders", music: "Music", settings: "Settings" };
-  panel.innerHTML = `<div class="panel"><header class="panel-head"><h2>${titles[name]}</h2><button class="close" aria-label="Close app">×</button></header><div class="panel-content" id="app-content"></div></div>`;
+  panel.innerHTML = `<div class="panel"><header class="panel-head"><h2>${APP_TITLES[name]}</h2><button class="close" aria-label="Close app">×</button></header><div class="panel-content" id="app-content"></div></div>`;
   panel.querySelector(".close").addEventListener("click", closeApp);
   const content = panel.querySelector("#app-content");
-  const renderers = { photos: renderPhotos, messages: renderMessages, calculator: renderCalculator, notes: renderNotes, reminders: renderReminders, music: renderMusic, settings: renderSettings };
+  const renderers = {
+    photos: renderPhotos,
+    messages: renderMessages,
+    calculator: renderCalculator,
+    notes: renderNotes,
+    reminders: renderReminders,
+    music: renderMusic,
+    settings: renderSettings
+  };
   renderers[name](content);
 }
 
@@ -219,16 +310,40 @@ document.querySelectorAll(".app-launch").forEach(button => {
 });
 
 function renderPhotos(root) {
-  root.innerHTML = '<p class="hint">A few colorful demo pictures</p><div class="photos-grid" aria-label="Photo gallery"><div class="photo-tile" role="img" aria-label="Sunset colors"></div><div class="photo-tile" role="img" aria-label="Green hills"></div><div class="photo-tile" role="img" aria-label="Pastel sky"></div><div class="photo-tile" role="img" aria-label="Soft landscape"></div></div>';
+  root.innerHTML = '<p class="hint">A few colorful demo pictures</p><div class="photos-grid" aria-label="Photo gallery"><div class="photo-tile" role="img" aria-label="Sunset colors"></div><div class="photo-tile" role="img" aria-label="Forest tones"></div><div class="photo-tile" role="img" aria-label="Pastel shapes"></div><div class="photo-tile" role="img" aria-label="Warm abstract light"></div></div>';
 }
 
 function renderCalculator(root) {
   root.innerHTML = '<div class="calc"><div class="calc-display" aria-live="polite">0</div><div class="calc-grid"></div></div>';
   const display = root.querySelector(".calc-display");
   const grid = root.querySelector(".calc-grid");
-  let current = "0", stored = null, operation = null, resetOnInput = false;
-  const keys = [["AC", "utility"], ["±", "utility"], ["%", "utility"], ["÷", "operator"], ["7", ""], ["8", ""], ["9", ""], ["×", "operator"], ["4", ""], ["5", ""], ["6", ""], ["−", "operator"], ["1", ""], ["2", ""], ["3", ""], ["+", "operator"], ["0", "zero"], [".", ""], ["=", "operator"]];
-  function show() { display.textContent = current.length > 12 ? Number(current).toPrecision(8) : current; }
+  let current = "0";
+  let stored = null;
+  let operation = null;
+  let resetOnInput = false;
+
+  const keys = [
+    ["AC", "utility"], ["±", "utility"], ["%", "utility"], ["÷", "operator"],
+    ["7", ""], ["8", ""], ["9", ""], ["×", "operator"],
+    ["4", ""], ["5", ""], ["6", ""], ["−", "operator"],
+    ["1", ""], ["2", ""], ["3", ""], ["+", "operator"],
+    ["0", "zero"], [".", ""], ["=", "operator"]
+  ];
+
+  function formatNumber(value) {
+    const rounded = Number(value.toPrecision(10));
+    return Number.isFinite(rounded) ? String(rounded) : "Error";
+  }
+
+  function show() {
+    if (current.length > 12) {
+      const numeric = Number(current);
+      display.textContent = Number.isFinite(numeric) ? numeric.toPrecision(8) : "Error";
+      return;
+    }
+    display.textContent = current;
+  }
+
   function calculate(a, b, op) {
     if (op === "+") return a + b;
     if (op === "−") return a - b;
@@ -236,25 +351,59 @@ function renderCalculator(root) {
     if (op === "÷") return b === 0 ? NaN : a / b;
     return b;
   }
+
   keys.forEach(([label, style]) => {
     const button = document.createElement("button");
-    button.className = `calc-key ${style}`;
+    button.type = "button";
+    button.className = `calc-key ${style}`.trim();
     button.textContent = label;
     button.addEventListener("click", () => {
-      if (label === "AC") { current = "0"; stored = null; operation = null; }
-      else if (label === "±") { current = String(Number(current) * -1); }
-      else if (label === "%") { current = String(Number(current) / 100); }
-      else if (["+", "−", "×", "÷"].includes(label)) { stored = Number(current); operation = label; resetOnInput = true; }
-      else if (label === "=" && operation && stored !== null) {
-        const result = calculate(stored, Number(current), operation);
-        current = Number.isFinite(result) ? String(Number(result.toPrecision(10))) : "Error";
-        stored = null; operation = null; resetOnInput = true;
-      } else if (label === ".") {
-        if (resetOnInput) { current = "0"; resetOnInput = false; }
+      if (label === "AC") {
+        current = "0"; stored = null; operation = null; resetOnInput = false;
+      }
+      else if (label === "±") {
+        const numeric = Number(current);
+        current = Number.isFinite(numeric) ? String(numeric * -1) : "0";
+      }
+      else if (label === "%") {
+        const numeric = Number(current);
+        current = Number.isFinite(numeric) ? String(numeric / 100) : "0";
+        resetOnInput = true;
+      }
+      else if (["+", "−", "×", "÷"].includes(label)) {
+        if (operation && stored !== null && !resetOnInput) {
+          const result = calculate(stored, Number(current), operation);
+          current = Number.isFinite(result) ? formatNumber(result) : "Error";
+          stored = Number(current);
+        } else {
+          stored = Number(current);
+        }
+        operation = label;
+        resetOnInput = true;
+      }
+      else if (label === "=") {
+        if (operation && stored !== null) {
+          const result = calculate(stored, Number(current), operation);
+          current = Number.isFinite(result) ? formatNumber(result) : "Error";
+          stored = null;
+          operation = null;
+          resetOnInput = true;
+        }
+      }
+      else if (label === ".") {
+        if (resetOnInput) {
+          current = "0";
+          resetOnInput = false;
+        }
         if (!current.includes(".")) current += ".";
-      } else if (/^\d$/.test(label)) {
-        if (resetOnInput || current === "0" || current === "Error") { current = label; resetOnInput = false; }
-        else if (current.length < 12) current += label;
+      }
+      else if (/^\d$/.test(label)) {
+        if (resetOnInput || current === "0" || current === "Error") {
+          current = label;
+          resetOnInput = false;
+        } else if (current.length < 12) {
+          current += label;
+        }
       }
       show();
     });
@@ -266,48 +415,48 @@ function renderNotes(root) {
   root.innerHTML = '<textarea class="notes" aria-label="Note" placeholder="Write a note…"></textarea><div class="note-status" aria-live="polite"></div>';
   const textarea = root.querySelector("textarea");
   const status = root.querySelector(".note-status");
-  try { textarea.value = localStorage.getItem("little-phone-note") || ""; }
-  catch { status.textContent = "Notes are available for this visit, but storage is disabled."; }
+  textarea.value = storage.get(STORAGE_KEYS.note, "");
+
   textarea.addEventListener("input", () => {
-    try {
-      localStorage.setItem("little-phone-note", textarea.value);
-      status.textContent = "Saved on this device";
-    } catch {
-      status.textContent = "Could not save this note in browser storage.";
-    }
+    const value = textarea.value;
+    const saved = storage.set(STORAGE_KEYS.note, value);
+    status.textContent = saved ? "Saved on this device" : "Could not save this note in browser storage.";
   });
 }
 
 function renderReminders(root) {
-  root.innerHTML = '<form class="reminder-form"><label class="sr-only" for="reminder-input">New reminder</label><input id="reminder-input" maxlength="120" placeholder="Add a reminder"><button>Add</button></form><ul class="reminder-list"></ul><p class="note-status" aria-live="polite"></p>';
+  root.innerHTML = '<form class="reminder-form"><label class="sr-only" for="reminder-input">New reminder</label><input id="reminder-input" maxlength="120" placeholder="Add a reminder"><button type="submit">Add</button></form><div class="note-status" aria-live="polite"></div><ul class="reminder-list"></ul>';
   const form = root.querySelector("form");
   const input = root.querySelector("input");
   const list = root.querySelector("ul");
   const status = root.querySelector(".note-status");
-  let reminders = [];
-  try {
-    const saved = localStorage.getItem("little-phone-reminders");
-    reminders = saved ? JSON.parse(saved) : [];
-    if (!Array.isArray(reminders) || reminders.some(item => typeof item.text !== "string" || typeof item.done !== "boolean")) {
-      throw new Error("Saved reminders are not valid.");
-    }
-  } catch {
+  let reminders = storage.getJSON(STORAGE_KEYS.reminders, []);
+
+  if (!Array.isArray(reminders) || reminders.some(item => typeof item.text !== "string" || typeof item.done !== "boolean")) {
     reminders = [];
     status.textContent = "Could not load saved reminders. New reminders can still be added.";
   }
+
   function save() {
-    try {
-      localStorage.setItem("little-phone-reminders", JSON.stringify(reminders));
-      status.textContent = "Saved on this device";
-    } catch {
-      status.textContent = "Could not save reminders in browser storage.";
-    }
+    const saved = storage.setJSON(STORAGE_KEYS.reminders, reminders);
+    status.textContent = saved ? "Saved on this device" : "Could not save reminders in browser storage.";
   }
+
   function draw() {
     list.replaceChildren();
+
+    if (!reminders.length) {
+      const empty = document.createElement("li");
+      empty.className = "empty-state";
+      empty.textContent = "No reminders yet.";
+      list.append(empty);
+      return;
+    }
+
     reminders.forEach((reminder, index) => {
       const item = document.createElement("li");
       item.className = `reminder-item${reminder.done ? " done" : ""}`;
+
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
       checkbox.checked = reminder.done;
@@ -317,8 +466,10 @@ function renderReminders(root) {
         save();
         draw();
       });
+
       const text = document.createElement("span");
       text.textContent = reminder.text;
+
       const remove = document.createElement("button");
       remove.className = "reminder-delete";
       remove.type = "button";
@@ -329,10 +480,12 @@ function renderReminders(root) {
         save();
         draw();
       });
+
       item.append(checkbox, text, remove);
       list.append(item);
     });
   }
+
   draw();
   form.addEventListener("submit", event => {
     event.preventDefault();
@@ -347,45 +500,74 @@ function renderReminders(root) {
 }
 
 function renderMessages(root) {
-  root.innerHTML = '<div class="messages"><div class="bubble">Hey! Welcome to your little phone demo 👋</div><div class="bubble mine">It works!</div></div><form class="message-form"><label class="sr-only" for="message-input">Message</label><input id="message-input" autocomplete="off" placeholder="Message"><button class="send">Send</button></form>';
+  const defaultMessages = [
+    { text: "Hey! Welcome to your little phone demo 👋", mine: false },
+    { text: "It works!", mine: true }
+  ];
+  const savedMessages = storage.getJSON(STORAGE_KEYS.messages, defaultMessages);
+  const messages = Array.isArray(savedMessages) ? savedMessages : defaultMessages;
+
+  root.innerHTML = '<div class="messages" aria-live="polite"></div><form class="message-form"><label class="sr-only" for="message-input">New message</label><input id="message-input" placeholder="Message"><button type="submit">Send</button></form>';
+  const list = root.querySelector(".messages");
   const form = root.querySelector("form");
   const input = root.querySelector("input");
-  const messages = root.querySelector(".messages");
+
+  function renderList() {
+    list.replaceChildren();
+    messages.forEach(message => {
+      const bubble = document.createElement("div");
+      bubble.className = `bubble${message.mine ? " mine" : ""}`;
+      bubble.textContent = message.text;
+      list.append(bubble);
+    });
+    list.scrollTop = list.scrollHeight;
+  }
+
+  function saveMessages() {
+    storage.setJSON(STORAGE_KEYS.messages, messages);
+  }
+
+  renderList();
+
   form.addEventListener("submit", event => {
     event.preventDefault();
     const text = input.value.trim();
     if (!text) return;
-    const bubble = document.createElement("div");
-    bubble.className = "bubble mine";
-    bubble.textContent = text;
-    messages.append(bubble);
+    messages.push({ text, mine: true });
+    saveMessages();
+    renderList();
     input.value = "";
-    messages.scrollTop = messages.scrollHeight;
+    input.focus();
   });
 }
 
 function renderMusic(root) {
-  root.innerHTML = '<div class="music"><div class="album" aria-hidden="true">♫</div><h3>Good Vibes</h3><p class="hint">A pretend song for your pretend phone</p><button aria-label="Play">▶</button></div>';
+  root.innerHTML = '<div class="music"><div class="album" aria-hidden="true">♫</div><h3>Good Vibes</h3><p class="hint">A pretend song for your pretend phone</p><button type="button" aria-label="Play">▶</button></div>';
   const play = root.querySelector("button");
+  const hint = root.querySelector(".hint");
   play.addEventListener("click", () => {
     const playing = play.textContent === "▶";
     play.textContent = playing ? "Ⅱ" : "▶";
     play.setAttribute("aria-label", playing ? "Pause" : "Play");
-    root.querySelector(".hint").textContent = playing ? "Playing a demo — no audio" : "A pretend song for your pretend phone";
+    hint.textContent = playing ? "Playing a demo — no audio" : "A pretend song for your pretend phone";
   });
 }
 
 function renderSettings(root) {
-  root.innerHTML = '<div class="settings"><div class="setting-row"><strong>Choose a wallpaper</strong></div><div class="wallpaper-picker" aria-label="Wallpaper choices"><button class="wallpaper-choice wallpaper-dawn" data-wallpaper="dawn" aria-label="Dawn wallpaper"><span>Dawn</span></button><button class="wallpaper-choice wallpaper-ocean" data-wallpaper="ocean" aria-label="Ocean wallpaper"><span>Ocean</span></button><button class="wallpaper-choice wallpaper-sunset" data-wallpaper="sunset" aria-label="Sunset wallpaper"><span>Sunset</span></button><button class="wallpaper-choice wallpaper-mint" data-wallpaper="mint" aria-label="Mint wallpaper"><span>Mint</span></button></div><p class="note-status" id="settings-status" aria-live="polite"></p><div class="setting-row"><span>System</span><strong>iOS 27 Concept</strong></div><p class="hint">A small, unofficial phone interface demo. It has no calling or real messaging services.</p></div>';
-  let selected = "dawn";
-  try {
-    selected = localStorage.getItem("little-phone-wallpaper") || "dawn";
-  } catch {
-    root.querySelector("#settings-status").textContent = "Wallpaper can be previewed, but browser storage is unavailable.";
-  }
+  root.innerHTML = '<div class="settings"><div class="setting-row"><strong>Choose a wallpaper</strong><button type="button" id="settings-reset">Reset</button></div><div class="wallpaper-picker" aria-label="Wallpaper choices"><button class="wallpaper-choice" type="button" data-wallpaper="dawn" aria-pressed="false"><span>Dawn</span></button><button class="wallpaper-choice" type="button" data-wallpaper="ocean" aria-pressed="false"><span>Ocean</span></button><button class="wallpaper-choice" type="button" data-wallpaper="sunset" aria-pressed="false"><span>Sunset</span></button><button class="wallpaper-choice" type="button" data-wallpaper="mint" aria-pressed="false"><span>Mint</span></button></div><div class="note-status" id="settings-status" aria-live="polite"></div></div>';
+  const reset = root.querySelector("#settings-reset");
+  const status = root.querySelector("#settings-status");
+  let selected = storage.get(STORAGE_KEYS.wallpaper, "dawn");
+  if (!wallpaperOptions.includes(selected)) selected = "dawn";
+
   root.querySelectorAll(".wallpaper-choice").forEach(button => {
     button.setAttribute("aria-pressed", String(button.dataset.wallpaper === selected));
     button.addEventListener("click", () => applyWallpaper(button.dataset.wallpaper));
+  });
+
+  reset.addEventListener("click", () => {
+    applyWallpaper("dawn");
+    status.textContent = "Wallpaper reset to the default.";
   });
 }
 
